@@ -56,14 +56,23 @@ def log():
         username = request.form.get('username')
         password = request.form.get('password')
         cursor.execute("SELECT * FROM user1 WHERE username='{}';".format(username))
-        salt = cursor.fetchall()[0][3]
-        password = md5_calc(password, salt)
-        cursor.execute("SELECT * FROM user1 WHERE username='{}' and password='{}' ; ".format(username, password))
-        if cursor.fetchall():
-            return '登录成功'
-        else:
+        try:
+            salt = cursor.fetchall()[0][3]
+            password = md5_calc(password, salt)
+            cursor.execute("SELECT * FROM user1 WHERE username='{}' and password='{}' ; ".format(username, password))
+            '''
+            try:
+                cursor.fetchall()
+                return '登录成功'
+            except:
+                return '帐号或密码错误'
+            '''
+            if cursor.fetchall():
+                return '登录成功'
+            else:
+                return '帐号或密码错误'
+        except:
             return '帐号或密码错误'
-
 
 if __name__ == '__main__':
     conn = pymysql.connect(
