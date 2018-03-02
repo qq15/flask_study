@@ -78,10 +78,10 @@ def log():
 if __name__ == '__main__':
     conn = pymysql.connect(
         host='localhost',
+        port='0.0.0.0',
         user='root',
         passwd='a',
-        db='test1',
-        charset='utf8'
+        db='test1'
     )
     cursor = conn.cursor()
     app.run(port=4000, host="0.0.0.0")
