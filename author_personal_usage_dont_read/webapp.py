@@ -78,7 +78,7 @@ def log():
 if __name__ == '__main__':
     conn = pymysql.connect(
         host='localhost',
-        port='0.0.0.0',
+        port=3306,
         user='root',
         passwd='a',
         db='test1'
